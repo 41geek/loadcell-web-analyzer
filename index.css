@@ -1,0 +1,312 @@
+/* Basic Reset & Root Variables */
+:root {
+    --bg-color: #121212;
+    --surface-color: #1e1e1e;
+    --primary-color: #03dac6;
+    --primary-variant-color: #3700b3;
+    --secondary-color: #bb86fc;
+    --text-color: #e0e0e0;
+    --text-secondary-color: #a0a0a0;
+    --border-color: #333333;
+    --error-color: #cf6679;
+    --success-color: #4caf50;
+
+    --font-family-sans: 'Inter', sans-serif;
+    --font-family-mono: 'Roboto Mono', monospace;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family-sans);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 2rem;
+}
+
+#root {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* General Styles */
+h1, h2 {
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+button, input, select {
+    font-family: inherit;
+    color: inherit;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+button {
+    cursor: pointer;
+    background-color: var(--primary-variant-color);
+    border-color: var(--primary-variant-color);
+    font-weight: 500;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Layout */
+.app-container {
+    display: grid;
+    gap: 2rem;
+}
+
+.main-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.serial-status {
+    font-family: var(--font-family-mono);
+    padding: 0.5rem 1rem;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    min-width: 150px;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.serial-status.connected {
+    color: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.serial-status.error {
+    color: var(--error-color);
+    border-color: var(--error-color);
+}
+
+.totals-display {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    text-align: center;
+}
+
+.total-card {
+    background-color: var(--surface-color);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.total-card h2 {
+    font-size: 1.2rem;
+    color: var(--text-secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.total-card .value {
+    font-family: var(--font-family-mono);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.total-card .stability-slope {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    font-family: var(--font-family-mono);
+    color: var(--text-secondary-color);
+}
+
+/* Charts Section */
+.charts-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.chart-container {
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    height: 250px;
+    padding: 1rem;
+}
+
+.chart-container svg {
+    width: 100%;
+    height: 100%;
+}
+
+.chart-container .line {
+    fill: none;
+    stroke-width: 2px;
+}
+
+.chart-container .chart-title {
+    fill: var(--text-color);
+    font-size: 10px;
+    font-weight: 500;
+    text-anchor: middle;
+}
+
+.chart-container .chart-waiting-text {
+    fill: var(--text-secondary-color);
+    font-size: 8px;
+    text-anchor: middle;
+}
+
+
+.scales-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--surface-color);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.scales-table th, .scales-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.scales-table th {
+    background-color: #2a2a2a;
+}
+
+.scales-table td {
+    font-family: var(--font-family-mono);
+}
+
+.scales-table tr:last-child td {
+    border-bottom: none;
+}
+
+.scales-table .stability-slope-cell {
+    color: var(--text-secondary-color);
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--surface-color);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 700px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    margin: 0;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.calibration-form {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.calibration-form input {
+    flex-grow: 1;
+}
+
+.calibration-results {
+    font-family: var(--font-family-mono);
+}
+
+.calibration-results span {
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.data-points-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.data-points-table th, .data-points-table td {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+.logging-section {
+    background-color: var(--surface-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+.logging-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.logging-controls input[type="number"] {
+    width: 100px;
+}
+.log-display {
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 4px;
+    font-family: var(--font-family-mono);
+    font-size: 0.9rem;
+}

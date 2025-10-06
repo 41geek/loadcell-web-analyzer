@@ -1,0 +1,5 @@
+{
+  "name": "Loadcell Data Analyzer",
+  "description": "A web application to receive, process, calibrate, and log data from multiple loadcell scales.",
+  "requestFramePermissions": []
+}
